@@ -12,6 +12,9 @@ const app = express();
 // Configurar CORS - .use es como un control o filtro que se ejecuta antes de cualquier peticion
 app.use( cors() );
 
+//Lectura y parseo del body
+app.use(express.json());
+
 // Base de datos
 dbConnection();
 
@@ -20,10 +23,6 @@ app.listen(process.env.PORT,()=>{
 })
 
 // Rutas
+app.use('/api/login',require('./routes/auth'))
+app.use('/api/usuarios',require('./routes/usuarios'))
 
-app.get('/',(req,res)=>{
-    res.json({
-        ok:true,
-        msg:'Hola mundo'
-    })
-});
